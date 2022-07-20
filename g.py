@@ -1162,7 +1162,15 @@ class BaseDatabaseSchemaEditor:
         default = self._column_default_sql(new_field)
         params = [new_default]
 
-       
+        if drop:
+            params = []
+        elif self.connection.features.requires_literal_defaults:
+            # Some databases (Oracle) can't take defaults as a parameter
+            # If this is the case, the SchemaEditor for that database should
+            # implement prepare_default().
+            default = self.prepare_default(new_default)
+            params = []
+
         new_db_params = new_field.db_parameters(connection=self.connection)
         if drop:
             if new_field.null:
@@ -1281,13 +1289,26 @@ class BaseDatabaseSchemaEditor:
         return index_name
 
     def _get_index_tablespace_sql(self, model, fields, db_tablespace=None):
-        
+        if db_tablespace is None:
+            if len(fields) == 1 and fields[0].db_tablespace:
+                db_tablespace = fields[0].db_tablespace
+            elif model._meta.db_tablespace:
+                db_tablespace = model._meta.db_tablespace
+        if db_tablespace is not None:
+            return " " + self.connection.ops.tablespace_sql(db_tablespace)
+        return ""
 
     def _index_condition_sql(self, condition):
         if condition:
             return " WHERE " + condition
         return ""
 
+    def _index_include_sql(self, model, columns):
+        if not columns or not self.connection.features.supports_covering_indexes:
+            return ""
+        return Statement(
+            " INCLUDE (%(columns)s)",
+            columns=Columns(model._meta.db_table, columns, self.quote_name),
         )
 
     def _create_index_sql(
@@ -1688,6 +1709,9 @@ class BaseDatabaseSchemaEditor:
             ),
             columns=Columns(model._meta.db_table, [field.column], self.quote_name),
         )
+
+    def _delete_primary_key_sql(self, model, name):
+        return self._delete_constraint_sql(self.sql_delete_pk, model, name)
 
     def _collate_sql(self, collation):
         return "COLLATE " + self.quote_name(collation)
