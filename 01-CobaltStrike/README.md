@@ -17,9 +17,9 @@ sleep 60 50               ; Sleep 60 sec with 50% of jitter (Call back between 3
 ##### Default
 
 ```css
-run [command]
+run [command]wdedsaas
 ```
-
+wqqdqw
 ##### powershell.exe
 
 ```css
@@ -28,7 +28,7 @@ powershell [cmdlet] [args]
 ```
 
 ##### powerpick (Using PS w/o powershell.exe)
-
+dqwdqwqd
 ```css
 powrepick [cmdlet] [args]
 ```
