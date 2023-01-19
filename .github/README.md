@@ -14,8 +14,8 @@
 
 ### Target User Population Collection
 - Linkedin UserEnum - https://github.com/bigb0sss/LinkedinMama
-- US Staff UserEnum - https://github.com/bigb0sss/USStaffMama
-- NameSpi - https://github.com/waffl3ss/NameSpi
+- US Staff UserEnum - https://github.com/bigb0sss/USStaffMamaadad
+- NameSpi - https://github.com/waffl3ss/NameSpidsadsdssad
 
 ### Public Site Lookup (Github, Gitlab, etc.)
 - Gitrob - https://github.com/michenriksen/gitrob/ (Github Search)
@@ -203,9 +203,9 @@
 - Public MSDN - [Link](https://the-eye.eu/public/MSDN/)
 - Adversary Tactics: PowerShell - https://github.com/specterops/at-ps (Specterops)
 
-
+adssadsadddsasda
 ## Sexy Resources
-- MITRE ATT&CK - https://attack.mitre.org/
+- MITRE ATT&CK - https://attack.mitre.org/ddssaas
 - MalwareNews - https://malware.news/
 - CWE - http://cwe.mitre.org/top25/archive/2019/2019_cwe_top25.html
 - CTID - https://github.com/center-for-threat-informed-defense
